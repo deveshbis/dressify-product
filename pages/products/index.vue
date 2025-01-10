@@ -76,4 +76,12 @@ const addToCart = (item) => {
   localStorage.setItem("cart", JSON.stringify(cart));
   console.log("Item added to cart:", item);
 };
+
+//add item to the wishlist 
+const addToWishlist = (item) => {
+  let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+  wishlist.push(item);
+  localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  console.log("Item added to wishlist:", item);
+};
 </script>

@@ -16,12 +16,15 @@
   </div>
 </template>
 
-<script setup>
-import { ref, onMounted } from 'vue';
-
-const cartItems = ref([]);
-onMounted(() => {
-  const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
-  cartItems.value = savedCart;
-});
+<script>
+export default {
+  data() {
+    return {
+      cartItems: JSON.parse(localStorage.getItem('cart')) || [],
+    };
+  },
+};
 </script>
+
+<style scoped>
+</style>
