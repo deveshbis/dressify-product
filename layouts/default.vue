@@ -39,6 +39,13 @@
             
             <li class="max-lg:border-b max-lg:py-3">
               <NuxtLink
+                to="/products"
+                class="hover:text-[#007bff] text-gray-600 text-[15px] font-bold block"
+                >Products</NuxtLink
+              >
+            </li>
+            <li class="max-lg:border-b max-lg:py-3">
+              <NuxtLink
                 to="/about"
                 class="hover:text-[#007bff] text-gray-600 text-[15px] font-bold block"
                 >About</NuxtLink
