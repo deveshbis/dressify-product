@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="">
         <h1>Dressify Product page</h1>
         
     </div>

@@ -1,10 +1,10 @@
 <template>
-  <div class="font-sans p-4 mx-auto lg:max-w-6xl md:max-w-3xl">
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+  <div class="font-sans p-4 mx-auto lg:max-w-7xl md:max-w-3xl">
+    <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-6">
       <div
         v-for="item in products"
         :key="item.id"
-        class="bg-white flex flex-col overflow-hidden cursor-pointer hover:shadow-md transition-all">
+        class="bg-white flex flex-col overflow-hidden cursor-pointer hover:shadow-md transition-all p-5 rounded-lg border">
         <NuxtLink :to="`/products/${item.id}`">
           <div class="w-full">
             <img
@@ -62,26 +62,59 @@
 </template>
 
 <script setup>
+import Swal from 'sweetalert2';
+
 definePageMeta({
   Layout: "products",
 });
-
-// Fetch the product data
 const { data: products } = await useFetch("https://fakestoreapi.com/products");
 
-//  add item to the cart 
 const addToCart = (item) => {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart.push(item);
-  localStorage.setItem("cart", JSON.stringify(cart));
-  console.log("Item added to cart:", item);
+  const isItemInCart = cart.some(cartItem => cartItem.id === item.id);
+  
+  if (isItemInCart) {
+    Swal.fire({
+      icon: 'info',
+      title: 'Item already in cart!',
+      text: `${item.title} is already in your cart.`,
+      confirmButtonText: 'Okay'
+    });
+  } else {
+    cart.push(item);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    Swal.fire({
+      icon: 'success',
+      title: 'Added to Cart!',
+      text: `${item.title} has been added to your cart.`,
+      confirmButtonText: 'Okay'
+    });
+  }
 };
 
-//add item to the wishlist 
+// Add item to the wishlist
 const addToWishlist = (item) => {
   let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-  wishlist.push(item);
-  localStorage.setItem("wishlist", JSON.stringify(wishlist));
-  console.log("Item added to wishlist:", item);
+  const isItemInWishlist = wishlist.some(wishlistItem => wishlistItem.id === item.id);
+  
+  if (isItemInWishlist) {
+    Swal.fire({
+      icon: 'info',
+      title: 'Item already in wishlist!',
+      text: `${item.title} is already in your wishlist.`,
+      confirmButtonText: 'Okay'
+    });
+  } else {
+    wishlist.push(item);
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    Swal.fire({
+      icon: 'success',
+      title: 'Added to Wishlist!',
+      text: `${item.title} has been added to your wishlist.`,
+      confirmButtonText: 'Okay'
+    });
+  }
 };
 </script>
+
+
