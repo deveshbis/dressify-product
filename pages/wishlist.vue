@@ -1,7 +1,13 @@
 <template>
-  <div>This is wishlist page</div>
+    <div>
+This is wishlist page
+    </div>
 </template>
 
-<script setup></script>
+<script setup>
 
-<style lang="scss" scoped></style>
+</script>
+
+<style lang="scss" scoped>
+
+</style>

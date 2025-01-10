@@ -1,57 +1,59 @@
 <template>
-  <div class="font-[sans-serif] bg-white p-4 mx-auto max-w-[1400px]">
-    <h2 class="text-xl sm:text-3xl font-extrabold text-gray-800 mb-6 sm:mb-8">
-      Premium Threads
-    </h2>
+  <div class="font-sans p-4 mx-auto lg:max-w-6xl md:max-w-3xl">
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+      <div
+        v-for="item in products"
+        :key="item.id"
+        class="bg-white flex flex-col overflow-hidden cursor-pointer hover:shadow-md transition-all">
+        <NuxtLink :to="`/products/${item.id}`">
+          <div class="w-full">
+            <img
+              :src="item.image"
+              alt="Product 3"
+              class="w-full object-cover object-top aspect-[230/307]" />
+          </div>
+        </NuxtLink>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-      <div v-for="(item, key) in products">
-        <div class="group overflow-hidden cursor-pointer relative">
-          <NuxtLink :to="`/products/${item.id}`">
-            <div class="bg-gray-100 w-full overflow-hidden">
-              <img
-                :src="item.image"
-                alt="Product 1"
-                class="aspect-[3/4] w-full object-cover object-top hover:scale-110 transition-all duration-700" />
+        <div class="p-2 flex-1 flex flex-col">
+          <div class="flex-1">
+            <h5 class="text-sm sm:text-base font-bold text-gray-800 truncate">
+              {{ item.title }}
+            </h5>
+            <p class="mt-1 text-gray-500 truncate">
+              {{ item.title }}
+            </p>
+            <div class="flex flex-wrap justify-between gap-2 mt-2">
+              <div class="flex gap-2">
+                <h6 class="text-sm sm:text-base font-bold text-gray-800">
+                  $ {{ item.price }}
+                </h6>
+                <h6 class="text-sm sm:text-base text-gray-500">
+                  <strike>$15</strike>
+                </h6>
+              </div>
             </div>
-          </NuxtLink>
-
-          <div class="p-4 relative">
+          </div>
+          <div class="flex items-center gap-2 mt-4">
             <div
-              class="flex flex-wrap justify-between gap-2 w-full absolute px-4 pt-3 z-10 transition-all duration-500 left-0 right-0 group-hover:bottom-20 lg:bottom-5 lg:opacity-0 lg:bg-white lg:group-hover:opacity-100 max-lg:bottom-20 max-lg:py-3 max-lg:bg-white/60">
-              <button
-                type="button"
-                title="Add to wishlist"
-                class="bg-transparent outline-none border-none">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="fill-gray-800 w-5 h-5 inline-block"
-                  viewBox="0 0 64 64">
-                  <path
-                    d="M45.5 4A18.53 18.53 0 0 0 32 9.86 18.5 18.5 0 0 0 0 22.5C0 40.92 29.71 59 31 59.71a2 2 0 0 0 2.06 0C34.29 59 64 40.92 64 22.5A18.52 18.52 0 0 0 45.5 4ZM32 55.64C26.83 52.34 4 36.92 4 22.5a14.5 14.5 0 0 1 26.36-8.33 2 2 0 0 0 3.27 0A14.5 14.5 0 0 1 60 22.5c0 14.41-22.83 29.83-28 33.14Z"
-                    data-original="#000000"></path>
-                </svg>
-              </button>
-              <button
-                type="button"
-                title="Add to cart"
-                class="bg-transparent outline-none border-none">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="fill-gray-800 w-5 h-5 inline-block"
-                  viewBox="0 0 512 512">
-                  <path
-                    d="M164.96 300.004h.024c.02 0 .04-.004.059-.004H437a15.003 15.003 0 0 0 14.422-10.879l60-210a15.003 15.003 0 0 0-2.445-13.152A15.006 15.006 0 0 0 497 60H130.367l-10.722-48.254A15.003 15.003 0 0 0 105 0H15C6.715 0 0 6.715 0 15s6.715 15 15 15h77.969c1.898 8.55 51.312 230.918 54.156 243.71C131.184 280.64 120 296.536 120 315c0 24.812 20.188 45 45 45h272c8.285 0 15-6.715 15-15s-6.715-15-15-15H165c-8.27 0-15-6.73-15-15 0-8.258 6.707-14.977 14.96-14.996zM477.114 90l-51.43 180H177.032l-40-180zM150 405c0 24.813 20.188 45 45 45s45-20.188 45-45-20.188-45-45-45-45 20.188-45 45zm45-15c8.27 0 15 6.73 15 15s-6.73 15-15 15-15-6.73-15-15 6.73-15 15-15zm167 15c0 24.813 20.188 45 45 45s45-20.188 45-45-20.188-45-45-45-45 20.188-45 45zm45-15c8.27 0 15 6.73 15 15s-6.73 15-15 15-15-6.73-15-15 6.73-15 15-15zm0 0"
-                    data-original="#000000"></path>
-                </svg>
-              </button>
+              @click="addToWishlist(item)"
+              class="bg-pink-100 hover:bg-pink-200 w-12 h-9 flex items-center justify-center rounded cursor-pointer"
+              title="Wishlist">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16px"
+                class="fill-pink-600 inline-block"
+                viewBox="0 0 64 64">
+                <path
+                  d="M45.5 4A18.53 18.53 0 0 0 32 9.86 18.5 18.5 0 0 0 0 22.5C0 40.92 29.71 59 31 59.71a2 2 0 0 0 2.06 0C34.29 59 64 40.92 64 22.5A18.52 18.52 0 0 0 45.5 4ZM32 55.64C26.83 52.34 4 36.92 4 22.5a14.5 14.5 0 0 1 26.36-8.33 2 2 0 0 0 3.27 0A14.5 14.5 0 0 1 60 22.5c0 14.41-22.83 29.83-28 33.14Z"
+                  data-original="#000000"></path>
+              </svg>
             </div>
-            <div class="z-20 relative bg-white">
-              <h6 class="text-sm font-semibold text-gray-800 truncate">
-                {{ item.title }}
-              </h6>
-              <h6 class="text-sm text-gray-600 mt-2">${{ item.price }}</h6>
-            </div>
+            <button
+              @click="addToCart(item)"
+              type="button"
+              class="text-sm px-2 min-h-[36px] w-full bg-blue-600 hover:bg-blue-700 text-white tracking-wide ml-auto outline-none border-none rounded">
+              Add to cart
+            </button>
           </div>
         </div>
       </div>
@@ -64,7 +66,14 @@ definePageMeta({
   Layout: "products",
 });
 
+// Fetch the product data
 const { data: products } = await useFetch("https://fakestoreapi.com/products");
-</script>
 
-<style lang="scss" scoped></style>
+//  add item to the cart 
+const addToCart = (item) => {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cart.push(item);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  console.log("Item added to cart:", item);
+};
+</script>
