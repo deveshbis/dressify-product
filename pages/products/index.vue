@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="font-sans p-4 mx-auto lg:max-w-7xl md:max-w-3xl">
     <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-6">
       <div
@@ -117,4 +117,9 @@ const addToWishlist = (item) => {
 };
 </script>
 
+ -->
 
+
+<template>
+  
+</template>
