@@ -1,6 +1,6 @@
-<!-- <template>
-  <div class="font-sans p-4 mx-auto lg:max-w-7xl md:max-w-3xl">
-    <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-6">
+<template>
+  <div class="font-sans p-4 mx-auto lg:max-w-7xl md:max-w-3xl ">
+    <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-6 mt-20">
       <div
         v-for="item in products"
         :key="item.id"
@@ -117,9 +117,9 @@ const addToWishlist = (item) => {
 };
 </script>
 
- -->
 
 
-<template>
+
+<!-- <template>
   
-</template>
+</template> -->

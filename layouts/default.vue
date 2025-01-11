@@ -1,17 +1,15 @@
 <template>
   <div>
     <header
-      class="flex border-b bg-white font-sans min-h-[70px] tracking-wide w-full z-20 relative">
+      class="flex border-b font-sans min-h-[70px] tracking-wide w-full z-20 relative bg-white">
       <div
-        class="flex flex-wrap items-center justify-between sm:px-10 px-4 py-3 gap-4 w-full max-w-screen-xl mx-auto">
+        class="flex flex-wrap items-center justify-between sm:px-10 px-4 py-3 gap-4 w-full max-w-screen-xl mx-auto ">
         <NuxtLink to="/" class="max-sm:hidden">
           <span class="self-center text-2xl font-semibold">E-shop</span>
         </NuxtLink>
         <NuxtLink to="/" class="hidden max-sm:block">
           <span class="self-center text-2xl font-semibold">E-shop</span>
         </NuxtLink>
-       
-
         <div
           :class="{ block: isMenuOpen, hidden: !isMenuOpen }"
           class="lg:flex lg:gap-x-10 max-lg:space-y-3 max-lg:fixed max-lg:bg-white max-lg:w-1/2 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-6 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50">
@@ -104,14 +102,14 @@
       </div>
     </header>
     <!-- output the content -->
-    <div class="">
+    <div>
       <slot />
     </div>
 
     <!-- Footer section -->
-    <footer class="px-4 divide-y dark:bg-gray-100 dark:text-gray-800">
+    <footer class="px-4 divide-y dark:bg-gray-100 dark:text-gray-800 ">
       <div
-        class="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
+        class="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0 ">
         <div class="lg:w-1/3">
           <a
             rel="noopener noreferrer"
