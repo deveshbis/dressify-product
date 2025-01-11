@@ -1,73 +1,36 @@
 <template>
-  <!-- <div
-    class="bg-white flex flex-col overflow-hidden cursor-pointer hover:shadow-md transition-all">
-    <div class="w-full">
-      <img
-        :src="product.image" alt="Product 3"
-        class="w-full object-cover object-top aspect-[230/307]" />
-    </div>
+  <div>
+    <NuxtLink :to="`/products/${item.id}`">
+      <div class="w-full">
+        <img
+          :src="product.image"
+          alt="Product 3"
+          class="w-full object-cover object-top aspect-[230/307]" />
+      </div>
+    </NuxtLink>
 
     <div class="p-2 flex-1 flex flex-col">
       <div class="flex-1">
         <h5 class="text-sm sm:text-base font-bold text-gray-800 truncate">
-            {{product.title}}
+          {{ product.title }}
         </h5>
         <p class="mt-1 text-gray-500 truncate">
-          {{product.title}}
+          {{ product.title }}
         </p>
         <div class="flex flex-wrap justify-between gap-2 mt-2">
           <div class="flex gap-2">
-            <h6 class="text-sm sm:text-base font-bold text-gray-800">$15</h6>
+            <h6 class="text-sm sm:text-base font-bold text-gray-800">
+              $ {{ product.price }}
+            </h6>
             <h6 class="text-sm sm:text-base text-gray-500">
               <strike>$15</strike>
             </h6>
-          </div>
-          <div class="flex items-center gap-0.5">
-            <svg
-              class="w-[14px] h-[14px] fill-blue-600"
-              viewBox="0 0 14 13"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-            </svg>
-            <svg
-              class="w-[14px] h-[14px] fill-blue-600"
-              viewBox="0 0 14 13"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-            </svg>
-            <svg
-              class="w-[14px] h-[14px] fill-blue-600"
-              viewBox="0 0 14 13"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-            </svg>
-            <svg
-              class="w-[14px] h-[14px] fill-[#CED5D8]"
-              viewBox="0 0 14 13"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-            </svg>
-            <svg
-              class="w-[14px] h-[14px] fill-[#CED5D8]"
-              viewBox="0 0 14 13"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-            </svg>
           </div>
         </div>
       </div>
       <div class="flex items-center gap-2 mt-4">
         <div
+          @click="addToWishlist(product)"
           class="bg-pink-100 hover:bg-pink-200 w-12 h-9 flex items-center justify-center rounded cursor-pointer"
           title="Wishlist">
           <svg
@@ -81,17 +44,67 @@
           </svg>
         </div>
         <button
+          @click="addToCart(product)"
           type="button"
           class="text-sm px-2 min-h-[36px] w-full bg-blue-600 hover:bg-blue-700 text-white tracking-wide ml-auto outline-none border-none rounded">
           Add to cart
         </button>
       </div>
     </div>
-  </div> -->
+  </div>
 </template>
 
 <script setup>
 const { product } = defineProps(["product"]);
+
+const addToCart = (item) => {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const isItemInCart = cart.some((cartItem) => cartItem.id === item.id);
+
+  if (isItemInCart) {
+    Swal.fire({
+      icon: "info",
+      title: "Item already in cart!",
+      text: `${item.title} is already in your cart.`,
+      confirmButtonText: "Okay",
+    });
+  } else {
+    cart.push(item);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    Swal.fire({
+      icon: "success",
+      title: "Added to Cart!",
+      text: `${item.title} has been added to your cart.`,
+      confirmButtonText: "Okay",
+    });
+  }
+};
+
+// Add item to the wishlist
+const addToWishlist = (item) => {
+  let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+  const isItemInWishlist = wishlist.some(
+    (wishlistItem) => wishlistItem.id === item.id
+  );
+
+  if (isItemInWishlist) {
+    Swal.fire({
+      icon: "info",
+      title: "Item already in wishlist!",
+      text: `${item.title} is already in your wishlist.`,
+      confirmButtonText: "Okay",
+    });
+  } else {
+    wishlist.push(item);
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    Swal.fire({
+      icon: "success",
+      title: "Added to Wishlist!",
+      text: `${item.title} has been added to your wishlist.`,
+      confirmButtonText: "Okay",
+    });
+  }
+};
 </script>
 
 <style lang="scss" scoped></style>

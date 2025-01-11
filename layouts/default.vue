@@ -1,7 +1,7 @@
 <template>
   <div>
     <header
-      class="flex border-b font-sans min-h-[70px] tracking-wide w-full z-20 relative bg-white">
+      class="flex border-b font-sans min-h-[70px] tracking-wide w-full z-20 fixed bg-white">
       <div
         class="flex flex-wrap items-center justify-between sm:px-10 px-4 py-3 gap-4 w-full max-w-screen-xl mx-auto ">
         <NuxtLink to="/" class="max-sm:hidden">
